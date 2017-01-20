@@ -23,7 +23,7 @@
                     <ul class="dropdown-menu">
                         <li class="external">
                             <h3><span class="bold">{{notesQuantity}}</span> Servicios a domicilio</h3>
-                            <a href="page_inbox.html">Ver todos</a>
+
                         </li>
                         <li>
                             <ul class="dropdown-menu-list scroll" style="height: 325px;" data-handle-color="#637283">
@@ -98,7 +98,7 @@
                 <div class="portlet light bordered access-search-container col-md-12  col-sm-12 col-xs-12 ">
                     <h1 id="access_tittle" class="page-title small-margin-top text-center col-md-12"> Puerta de acceso </h1>
                     <div class="height-5-percent col-md-12 hidden-xs"></div>
-                    <div class="form-group no-padding col-md-offset-2 col-md-8 col-sm-12">
+                    <div class="form-group no-padding col-md-offset-2 col-md-8 col-sm-10 col-xs-12">
                         <div class="input-group">
                             <span class="input-group-addon ">
                                 <i class="fa fa-car"></i>
@@ -107,11 +107,11 @@
                         </div>
 
                     </div>
-                    <button class="btn   left-padding-10 col-md-1 col-sm-2   col-xs-2 btn-access-door height-39-pixel no-shadow" ng-click="deleteResidentVehiculeSpots()" title="Borrar texto" name="button">
+                    <button class="btn   left-padding-10 col-md-1 col-sm-2 hidden-xs btn-access-door height-39-pixel no-shadow" ng-click="deleteResidentVehiculeSpots()" title="Borrar texto" name="button">
                         <span>  <i class="fa fa-times-circle font-20 gray-font" aria-hidden="true"></i></span>
                     </button>
                     <div class="height-12-percent col-md-12 col-sm-12 hidden-xs"></div>
-                    <div class="form-group no-padding col-md-offset-2  col-md-8 col-sm-12">
+                    <div class="form-group no-padding col-md-offset-2  col-md-8 col-sm-10 col-xs-12">
                         <div class="input-group">
                             <span class="input-group-addon ">
                                   <i class="fa fa-user"></i>
@@ -120,7 +120,7 @@
                         </div>
 
                     </div>
-                    <button class="btn   left-padding-10 col-md-1 col-sm-2   col-xs-2 btn-access-door height-41-pixel no-shadow" ng-click="deleteResidentVehiculeSpots()" title="Borrar texto" name="button">
+                    <button class="btn   left-padding-10 col-md-1 col-sm-2 hidden-xs btn-access-door height-41-pixel no-shadow" ng-click="deleteResidentVehiculeSpots()" title="Borrar texto" name="button">
                         <span>  <i class="fa fa-times-circle font-20 gray-font" aria-hidden="true"></i></span>
                     </button>
 
@@ -142,9 +142,9 @@
 
             <div ng-hide="hideRegisterForm==1" class="access-result-search-container col-md-6 col-sm-6 col-xs-12 ">
 
-                <div class="portlet light bordered access-information-result-container col-md-12 col-sm-12">
+                <div class="portlet light bordered access-information-result-container col-md-12 col-sm-12 col-xs-12 col-lg-12">
 
-                    <div class="col-md-12 col-sm-12 col-xs-12" ng-show="show==3" id="this">
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 " ng-show="show==3" id="this">
 
                         <div id="error-image" class="result-image"></div>
 
@@ -158,20 +158,22 @@
                         </div>
                         <div class="display-none " id="vehiculeAccess">
                             <h1 class="page-title {{colorVehiculeRegistered}} bold text-center font-30 " id="access_tittle">{{vehiculeRegisteredTitle}}</h1>
-                            <div class="col-md-12 col-sm-12 ">
+                            <div class="col-md-12 col-sm-12 hidden-xs">
                                 <div id="{{imageVehiculeState}}" class="result-image "></div>
                             </div>
                             <div class="height-5-percent hidden-md col-sm-12 hidden-xs "></div>
-                            <div class="access_car_information gray-font text-center col-md-4 col-sm-6 col-xs-12 no-padding">
+                            <div class="access_car_information gray-font text-center col-md-4 col-sm-6 col-xs-6 no-padding">
                                 <h5 class="bold font-30" style="text-transform: uppercase;">{{license_plate}}</h5>
                                 <h5 class="font-20">Placa</h5>
                             </div>
-
-                            <div class="col-md-4 col-sm-6 col-xs-12 no-padding marging-top-20">
+                            <div class="hidden-lg hidden-md hidden-sm col-xs-6">
+                                <div id="{{imageVehiculeState}}" class="result-image "></div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-12 no-padding marging-top-20" id="car-icon-font">
                                 <h1 class="col-mg-12 text-center "><i class=" text-center fa fa-car font-80 " style="color: {{color}}; " aria-hidden="true "></i> </h1>
                             </div>
                             <div class="height-4-percent hidden-md hidden-lg col-sm-12 hidden-xs "></div>
-                            <div class="col-md-4 col-sm-6 gray-font no-padding text-center ">
+                            <div class="col-md-4 col-sm-6 col-xs-6 gray-font no-padding text-center ">
                                 <h5 class="bold font-30">{{SelectedBrand}}</h5>
                                 <h5 class=" font-20">Marca</h5>
 
@@ -179,7 +181,7 @@
 
                             <div class="height-1-percent col-md-12 hidden-sm hidden-xs text-center"></div>
 
-                            <div class="col-md-5 col-sm-6 text-center gray-font no-padding">
+                            <div class="col-md-5 col-sm-6 col-xs-6 text-center gray-font no-padding">
                                 <h5 class="font-30 bold text-center "> {{SelectedHouse}}</h5>
                                 <h5 class=" font-20 text-center">Casa</h5>
                             </div>
@@ -385,7 +387,7 @@
                         </div>
                     </div>
                     <div class="col-md-12 col-sm-12 col-xs-12 " ng-show="show==10">
-                        <div class="loading col-lg-12 col-md-12 col-sm-12 col-xs-12"  id="loadingIconnn">
+                        <div class="loading col-lg-12 col-md-12 col-sm-12 col-xs-12" id="loadingIconnn">
                             <h1 class="text-center"><img src="../../assets/global/img/2.gif" alt="" /></h1>
                         </div>
                         <div class="display-none" id="visitantInvitedtAccess">

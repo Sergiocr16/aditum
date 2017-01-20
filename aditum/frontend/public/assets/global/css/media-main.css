@@ -60,7 +60,7 @@
 
 @media only screen and (max-width: 770px)  {
   .access-information-result-container{
-    height: 37%;
+
     margin-top: 100px;
   }
   .access-container{
@@ -130,9 +130,14 @@
 .access-search-container{
   margin-bottom: 4% !important;
 }
+.access-result-search-container{
+padding: 0;
+
+}
 .access-information-result-container{
-  min-height: 40% !important;
+  min-height: 0% !important;
   margin-top: 2% !important;
+padding-bottom: 10px !important;
 }
 .page-title{
   font-size: 25px !important;
@@ -164,5 +169,9 @@
 }
 #access_key_button{
   height: 35px;
+}
+#car-icon-font{
+  margin-top: 2px;
+  margin-bottom: 10px;
 }
 }
