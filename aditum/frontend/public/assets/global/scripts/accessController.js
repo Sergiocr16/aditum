@@ -106,7 +106,7 @@ app.controller('accessController', function($scope, $state, $rootScope, $window,
         } else {
             $scope.show = 3;
             angular.forEach(vehiculesPrueba, function(item, index) {
-                if (item.license_plate == $scope.id_vehicule) {
+                if (item.license_plate.toUpperCase() == $scope.id_vehicule.toUpperCase()) {
                     $scope.vehiculeRegisteredTitle = "Vehículo registrado";
                     $scope.colorVehiculeRegistered = "green-font";
                     $scope.imageVehiculeState = "success-car-image";

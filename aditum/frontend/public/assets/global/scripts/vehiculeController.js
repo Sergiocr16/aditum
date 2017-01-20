@@ -308,7 +308,7 @@ app.controller('VehiculesCreateController', function($scope, $http, $rootScope, 
             } else {
                 commonMethods.waitingMessage();
                 vehiculesFunctions.insert({
-                    license_plate: $scope.license_plate,
+                    license_plate: $scope.license_plate.toUpperCase(),
                     house_id: $scope.house.id,
                     color: $scope.color,
                     brand: $scope.brand.name,
