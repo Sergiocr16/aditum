@@ -1,0 +1,110 @@
+<div class="page-bar route-title">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="index.html">Condominio</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">Residentes</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="">{{title}}</a>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <div class="btn-group pull-right">
+
+        </div>
+    </div>
+</div>
+<div class="" style="margin-top:30px">
+</div>
+<div class="loading col-lg-12 col-md-12 col-sm-12 col-xs-12" id="loadingIcon">
+    <h1 class="text-center">
+        <img src="../../assets/global/img/loader4.gif" alt="" />
+
+    </h1>
+</div>
+<div class="display-none" id="edit_officer_form">
+    <div class="row">
+        <div class="col-md-12">
+            <form ng-submit="actionButton()">
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption font-green-haze">
+                            <i class="fa fa-user font-green-haze"></i>
+                            <span class="caption-subject bold uppercase">{{title}}</span>
+                        </div>
+                    </div>
+
+                    <form role="form">
+                        <div class="form-body">
+
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group form-md-line-input ">
+                                    <input ng-model="name" type="text" class="form-control  letters gray-font" id="form_control_1" required style="text-transform: capitalize;">
+                                    <label for="form_control_1" class="font-15">Nombre</label>
+                                </div>
+
+
+
+                                <div class="form-group form-md-line-input ">
+                                    <input ng-model="last_name" type="text" class="form-control  letters gray-font" id="form_control_1" required style="text-transform: capitalize;">
+                                    <label for="form_control_1" class="font-15">Primer Apellido</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group form-md-line-input">
+                                    <input ng-model="second_last_name" type="text" class="form-control  letters gray-font" id="form_control_1" required style="text-transform: capitalize;">
+                                    <label for="form_control_1" class="font-15">Segundo Apellido</label>
+                                </div>
+                                <div class="form-group form-md-line-input l">
+                                    <input ng-model="identification_number" type="text" class="form-control  numbers gray-font" id="form_control_1" required>
+                                    <label for="form_control_1" class="font-15">Cédula</label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-actions noborder">
+                            <h3 class="text-right">
+                            <button type="submit" class="btn blue"><i class="fa fa-pencil"></i> {{button}}</button>
+                            <button type="button" ui-sref="officers()" class="btn red default">Cancelar</button>
+                          </h3>
+                        </div>
+                    </form>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    jQuery(document).ready(function() {
+        $("#loadingIcon").fadeIn("slow");
+    });
+</script>
+
+<script type="text/javascript">
+    $('.date-picker').datepicker({
+        format: 'mm/dd/yyyy',
+        language: "es"
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('#blah').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#imgInp").change(function() {
+        readURL(this);
+    });
+</script>

@@ -1,0 +1,11 @@
+{
+  "name": "Aditum",
+  "version": "0.0.1",
+  "description": "App para administrar condominios",
+  "dependencies": {
+	"express": "*",
+  "ejs": "*"
+   },
+    "scripts": { "start": "node server.js"} ,
+  "engine": "node >=0.6.x"
+}

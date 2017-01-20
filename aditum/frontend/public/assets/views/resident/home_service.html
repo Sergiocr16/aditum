@@ -1,0 +1,62 @@
+<div class="page-bar route-title">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a>Reportar</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a>Servicio a domicilio</a>
+
+        </li>
+
+    </ul>
+    <div class="page-toolbar">
+        <div class="btn-group pull-right"> </div>
+    </div>
+</div>
+<div class="row display-none" id="all">
+    <div class="col-md-12">
+        <form ng-submit="actionButton()">
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption font-green-haze">
+                        <i class="fa fa-motorcycle font-green-haze"></i>
+                        <span class="caption-subject bold uppercase">Reportar Servicio a domicilio</span>
+                    </div>
+                </div>
+                <div class="portlet-body form gray-font">
+                    <div class="">
+                        <p>
+                            Mediante esta página podrás reportar la llegada de un servicio a domicilio a tu casa.
+                        </p>
+                        <p>
+                            Recuerda especificar la compañia de donde proviene.
+                        </p>
+                        <p>
+                            <b>
+                            El reporte será válido por la próxima hora, después de eso ya no tendrá validez.</b>
+                        </p>
+                    </div>
+                    <hr>
+                    <div class="form-group form-md-line-input">
+                        <textarea class="form-control gray-font" ng-model="note" rows="3" placeholder="Describe quien vendrá" required></textarea>
+                        <label for="form_control_1">Descripción</label>
+                    </div>
+                </div>
+                <div class="form-actions noborder">
+                    <h3 class="text-right">
+                        <button type="submit" class="btn blue">Reportar</button>
+                        <button type="button" ui-sref="condominos()" class="btn btn-danger">Cancelar</button>
+                      </h3>
+                </div>
+            </div>
+    </div>
+    </form>
+</div>
+</div>
+<script type="text/javascript">
+    $(function() {
+        $("#all").fadeIn("slow");
+    })
+</script>
