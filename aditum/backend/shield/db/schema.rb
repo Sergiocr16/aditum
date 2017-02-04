@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(version: 20170113190243) do
     t.string  "picture",               limit: 45
     t.integer "house_id",              limit: 4
     t.integer "company_id",            limit: 4
-    t.integer "identification_number", limit: 4
+    t.integer "identification_number", limit: 20
     t.string  "email",                 limit: 45
     t.integer "is_owner",              limit: 1,  default: 0
     t.integer "user_id",               limit: 4

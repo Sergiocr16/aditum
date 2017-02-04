@@ -961,16 +961,21 @@ app.controller('CondominosInvitedVisitorsListController', function($scope, $stat
     $scope.myVisitors;
 
     $scope.hasPermission = function(visitor) {
-        var currentTime = new Date().getTime();
-        var intiTime = new Date(visitor.invitation_starting_time).getTime();
-        var finalTime = new Date(visitor.invitation_limit_time).getTime();
+        var currentTime = new Date();
+        var intiTime = new Date(visitor.invitation_starting_time_default);
+        var finalTime = new Date(visitor.invitation_limit_time_default);
+        currentTime.setHours(currentTime.getHours() - 6)
+        // intiTime.setHours(intiTime.getHours() - 6)
+        // finalTime.setHours(finalTime.getHours() - 6)
+          console.log(intiTime);
+        console.log(currentTime);
+        console.log(finalTime);
         if (visitor.is_invited == 3) {
             return false;
         }
-        if (intiTime <= currentTime && currentTime <= finalTime) {
+        if (currentTime <= finalTime) {
             return true;
         }
-        return false;
     }
     $scope.properDate = function() {
         return moment(new Date()).format("DD-MM-YYYY");
@@ -1056,8 +1061,10 @@ app.controller('CondominosInvitedVisitorsListController', function($scope, $stat
         setTimeout(function() {
             $('#loadingIcon').fadeIn(100);
         }, 100);
+        console.log($scope.parseDate($scope.initial_date, $scope.initial_hour));
         commonMethods.waitingMessage();
         residentsAccionsController.deleteInvitedVisitor($scope.actualVisitor.id).success(function(data) {
+          console.log($scope.parseDate($scope.initial_date, $scope.initial_hour));
             residentsAccionsController.insert({
                 name: $scope.actualVisitor.name,
                 last_name: $scope.actualVisitor.last_name,
@@ -1135,14 +1142,16 @@ app.controller('CondominosInvitedVisitorsListController', function($scope, $stat
         residentsFunctions.get($rootScope.user.resident_id).success(function(data) {
             id_house = data.house_id
             residentsAccionsController.getInvitedVisitors(data.house_id).success(function(visitors) {
-                console.log(visitors)
+
                 if (visitors.length == 0) {
                     $scope.noVisitorsResult = 1;
                 } else {
                     $scope.noVisitorsResult = 0;
                     for (var i = 0; i < visitors.length; i++) {
-                        visitors[i].invitation_starting_time = moment(visitors[i].invitation_starting_time).format("LL h:mm a");
-                        visitors[i].invitation_limit_time = moment(visitors[i].invitation_limit_time).format("LL h:mm a");
+                      visitors[i].invitation_starting_time_default = visitors[i].invitation_starting_time;
+                      visitors[i].invitation_limit_time_default = visitors[i].invitation_limit_time;
+                        visitors[i].invitation_starting_time = moment.parseZone(visitors[i].invitation_starting_time).format("LL h:mm a");
+                        visitors[i].invitation_limit_time = moment.parseZone(visitors[i].invitation_limit_time).format("LL h:mm a");
                         if (visitors[i].license_plate == null || visitors[i].license_plate == "") {
                             visitors[i].license_plate = "No se registró"
                         }
@@ -1153,7 +1162,6 @@ app.controller('CondominosInvitedVisitorsListController', function($scope, $stat
                     $("#prueba").fadeIn(700);
                 }, 100)
                 $scope.visitors = visitors;
-
             })
         });
     }
