@@ -156,6 +156,18 @@ end
      render json: { errors: @house.errors }, status: 422
    end
   end
+  def setDesocupated
+  @house = House.find(params[:id])
+  @house.is_desocupated = 1
+  if @house.update house_params
+    DesocupationMailer.desocupation_email(@house).deliver_now
+    @house.desocupation_final_time = @house.desocupation_final_time;
+    @house.desocupation_initial_time = @house.desocupation_initial_time;
+    render :json => @house
+  else
+    render json: { errors: @house.errors }, status: 422
+  end
+ end
    def checkDesocupated
     @desocupatedHouses = House.where("is_desocupated = ? and company_id = ?",1,params[:company_id])
      @desocupatedHouses.each do |house|
@@ -170,19 +182,6 @@ end
      end
      render :json =>  @desocupatedHouses
    end
-  def setDesocupated
-
-   @house = House.find(params[:id])
-   @house.is_desocupated = 1
-   if @house.update house_params
-     DesocupationMailer.desocupation_email(@house).deliver_now
-     @house.desocupation_final_time = (  @house.desocupation_final_time;
-     @house.desocupation_initial_time = (  @house.desocupation_initial_time);
-     render :json => @house
-   else
-     render json: { errors: @house.errors }, status: 422
-   end
-  end
   # DELETE /residents/1.json
   def destroy
     @house.destroy

@@ -33,8 +33,8 @@ class VisitantsController < ApplicationController
   def create
     @visitant = Visitant.new(visitant_params)
     if(params[:invitation_starting_time] != nil)
-    @visitant.invitation_starting_time = params[:invitation_starting_time].to_datetime;
-    @visitant.invitation_limit_time = params[:invitation_limit_time].to_datetime;
+    @visitant.invitation_starting_time = (params[:invitation_starting_time].to_datetime);
+    @visitant.invitation_limit_time = (params[:invitation_limit_time].to_datetime);
    end
     @visitant.date_time = DateTime.now;
     if @visitant.save
@@ -54,7 +54,8 @@ class VisitantsController < ApplicationController
   end
 
   def findRegisteredVisitant
-    @currentDate = Time.now.strftime('%d %m %y %H:%M:%S')
+    @currentDate = (Time.now - 6.hours).strftime('%d %m %y %H:%M:%S')
+    puts @currentDate
     @visitant = Visitant.where("identification_number = ? and is_invited = ? and company_id = ?", params[:id], 1, params[:company_id]).last
     if (@visitant != nil)
     @starting_time = @visitant.invitation_starting_time.strftime('%d %m %y %H:%M:%S')
