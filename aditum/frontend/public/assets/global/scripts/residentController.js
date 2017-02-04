@@ -133,7 +133,9 @@ app.controller('ResidentsListController', function($scope, $state, $rootScope, $
                         residentsFunctions.update(id, {
                             enabled: 0
                         }).success(function() {
-
+                            $scope.loadResidentsDisabled();
+                            toastr["success"]("Se ha habilitado el residente correctamente.");
+                            bootbox.hideAll();
                             if (is_owner == 1) {
                                 usersFunctions.update_sign_up(user_id, {
                                     id_company: company_id,
@@ -150,7 +152,9 @@ app.controller('ResidentsListController', function($scope, $state, $rootScope, $
                         residentsFunctions.update(id, {
                             enabled: 1
                         }).success(function() {
-
+                            $scope.loadResidentsDisabled();
+                            toastr["success"]("Se ha habilitado el residente correctamente.");
+                            bootbox.hideAll();
                             if (is_owner == 1) {
                                 usersFunctions.update_sign_up(user_id, {
                                     id_company: company_id,
@@ -298,10 +302,11 @@ app.controller('ResidentsCreateController', function($scope, $http, $rootScope, 
             } else {
                 commonMethods.waitingMessage();
                 var number = 0;
+                console.log($scope.name);
                 residentsFunctions.insert({
-                    name: $scope.name,
-                    last_name: $scope.last_name,
-                    second_last_name: $scope.second_last_name,
+                    name: commonMethods.capitalizeFirstLetter($scope.name),
+                    last_name: commonMethods.capitalizeFirstLetter($scope.last_name),
+                    second_last_name: commonMethods.capitalizeFirstLetter($scope.second_last_name),
                     company_id: $rootScope.user.company_id,
                     identification_number: $scope.identification_number,
                     birthday: $scope.birthday,
@@ -317,7 +322,7 @@ app.controller('ResidentsCreateController', function($scope, $http, $rootScope, 
                             email: $scope.email,
                             confirm_success_url: "/",
                             permission_level: 1,
-                            id_company: 3,
+                            id_company: $rootScope.user.company_id,
                             resident_id: dataResident.id
                         }).success(function(data) {
                             residentsFunctions.update(dataResident.id, {
@@ -525,9 +530,9 @@ app.controller('ResidentsEditController', function($scope, $http, $state, $rootS
                     number = 0;
                 }
                 residentsFunctions.update($scope.residentId, {
-                    name: $scope.name,
-                    last_name: $scope.last_name,
-                    second_last_name: $scope.second_last_name,
+                    name: commonMethods.capitalizeFirstLetter($scope.name),
+                    last_name: commonMethods.capitalizeFirstLetter($scope.last_name),
+                    second_last_name: commonMethods.capitalizeFirstLetter($scope.second_last_name),
                     company_id: company_id,
                     identification_number: $scope.identification_number,
                     birthday: $scope.birthday,

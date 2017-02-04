@@ -20,16 +20,10 @@
 <div id="direct_upload" ngf-drop="uploadFiles($files)" ngf-drag-over-class="dragOverClass($event)" ng-model="files" ng-multiple="true">
     <form>
         <div class="form_line">
-            <label path="title">Title:</label>
-            <div class="form_controls">
-                <input type="text" class="form-control" placeholder="Title" ng-model="title" />
-            </div>
-        </div>
-        <div class="form_line">
             <label>Image:</label>
             <div class="form_controls">
                 <div class="upload_button_holder">
-                    <div href="#" class="upload_button" ngf-select="uploadFiles($files)" multiple title="upload" resetOnClick="true">Upload</div>
+                    <div href="#" class="upload_button" name="file" ngf-select="uploadFiles($files)" multiple title="upload" resetOnClick="true">Upload</div>
                 </div>
 
             </div>
@@ -137,7 +131,7 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
-    $("#imgInp ").change(function() {
+    $("#imgInp").change(function() {
         readURL(this);
     });
 </script>

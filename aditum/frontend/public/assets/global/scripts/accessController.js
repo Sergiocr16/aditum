@@ -313,7 +313,7 @@ app.controller('accessController', function($scope, $state, $rootScope, $window,
     cleanNotes = function() {
         accessFunctions.cleanNotes();
     }
-    cleanNotes();
+
     setInterval(getHomeServices, 5000);
     setInterval(getEmergency, 5000);
     setInterval(cleanNotes, 500000);

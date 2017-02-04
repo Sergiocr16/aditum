@@ -54,6 +54,13 @@ app.controller('OfficersCreateController', function($scope, $http, $rootScope, $
         $("#edit_officer_form").fadeIn(300);
     }, 600)
 
+
+    // String.prototype.capitalize = function() {
+    //     return this.replace(/(?:^|\s)\S/g, function(a) {
+    //         return a.toUpperCase();
+    //     });
+    // };
+
     $scope.actionButton = function() {
 
         officersFunctions.getAll().success(function(officers) {
@@ -63,10 +70,10 @@ app.controller('OfficersCreateController', function($scope, $http, $rootScope, $
             } else {
                 commonMethods.waitingMessage();
                 officersFunctions.insert({
-                    name: $scope.name,
-                    last_name: $scope.last_name,
-                    second_last_name: $scope.second_last_name,
-                    company_id: 3,
+                    name: commonMethods.capitalizeFirstLetter($scope.name),
+                    last_name: commonMethods.capitalizeFirstLetter($scope.last_name),
+                    second_last_name: commonMethods.capitalizeFirstLetter($scope.second_last_name),
+                    company_id: $rootScope.user.company_id,
                     identification_number: $scope.identification_number
                 }).success(function() {
                     bootbox.hideAll();
@@ -89,7 +96,8 @@ app.controller('OfficersEditController', function($scope, $http, $state, $rootSc
     commonMethods.validateNumbers();
     officersFunctions.get($stateParams.id).success(function(data) {
         $scope.name = data.name;
-        officerId = data.id;
+        officerId = data.identification_number;
+        $scope.officerId = data.id;
         $scope.last_name = data.last_name;
         $scope.second_last_name = data.second_last_name;
         $scope.identification_number = data.identification_number;
@@ -106,11 +114,11 @@ app.controller('OfficersEditController', function($scope, $http, $state, $rootSc
                 toastr["error"]("La cédula ingresada ya existe");
             } else {
                 commonMethods.waitingMessage();
-                officersFunctions.update(officerId, {
-                    name: $scope.name,
-                    last_name: $scope.last_name,
-                    second_last_name: $scope.second_last_name,
-                    company_id: 3,
+                officersFunctions.update($scope.officerId, {
+                    name: commonMethods.capitalizeFirstLetter($scope.name),
+                    last_name: commonMethods.capitalizeFirstLetter($scope.last_name),
+                    second_last_name: commonMethods.capitalizeFirstLetter($scope.second_last_name),
+                    company_id: $rootScope.user.company_id,
                     identification_number: $scope.identification_number
                 }).success(function() {
                     bootbox.hideAll();

@@ -447,7 +447,7 @@ app.controller('VehiculesEditController', function($scope, $http, $state, $rootS
                     house_id: $scope.house.id,
                     color: $scope.color,
                     brand: $scope.brand.name,
-                    company_id: 3
+                    company_id: $rootScope.user.company_id
                 }).success(function() {
                     bootbox.hideAll();
                     $state.go('vehicules');

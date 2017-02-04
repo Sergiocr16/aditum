@@ -1,6 +1,6 @@
-var app = angular.module('app', ['ng-token-auth', 'ui.router', 'ngResource', 'cloudinary', 'ngFileUpload']).config(function($authProvider, $locationProvider, $urlRouterProvider) {
+var app = angular.module('app', ['ng-token-auth', 'ui.router', 'ngResource', 'cloudinary', 'ngFileUpload']).config(function($httpProvider, $authProvider, $locationProvider, $urlRouterProvider) {
     var url = window.location.href;
-
+    delete $httpProvider.defaults.headers.common['If-Modified-Since'];
     $authProvider.configure({
         apiUrl: 'https://afternoon-woodland-36877.herokuapp.com/api/companies/0',
         tokenValidationPath: '/auth/validate_token',
@@ -1043,11 +1043,15 @@ app.factory('commonMethods', function($rootScope, $state, residentsFunctions, ve
                 itemsLinked.push(item);
 
             },
+            capitalizeFirstLetter: function(string) {
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            },
             moveToLink: function(item, itemsToLink, itemsLinked) {
                 var index = itemsLinked.indexOf(item);
                 itemsLinked.splice(index, 1);
                 itemsToLink.push(item);
             }
+
         };
     })
     // >>>>>>> origin/master

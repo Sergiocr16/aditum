@@ -240,7 +240,7 @@ app.controller('emergencyController', function($scope, $state, $rootScope, $wind
 
 })
 
-app.controller('CreateCondominoController', function($scope, $state, $rootScope, Upload, cloudinary, $stateParams, residentsAccionsController, residentsFunctions, commonMethods) {
+app.controller('CreateCondominoController', function($scope, $http, $state, $rootScope, Upload, cloudinary, $stateParams, residentsAccionsController, residentsFunctions, commonMethods) {
     $rootScope.active = "residentsHouses";
     $scope.title = "Registrar residente";
     $scope.button = "Registrar";
@@ -260,13 +260,26 @@ app.controller('CreateCondominoController', function($scope, $state, $rootScope,
         if (!$scope.files) return;
         angular.forEach(files, function(file) {
             if (file && !file.$error) {
-                file.upload = Upload.upload({
-                    url: "https://api.cloudinary.com/v1_1/lh/upload",
+                console.log(file);
+                $scope.file = file;
+
+                console.log($scope.file);
+                delete $http.defaults.headers.common["if-modified-since"];
+                Upload.upload({
+                    url: "https://api.cloudinary.com/v1_1/lighthouse/upload",
+
+                    headers: {
+                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
+                        "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+                    },
                     data: {
+                        file: $scope.file,
                         upload_preset: "cbvodmlb",
                         tags: 'myphotoalbum',
-                        context: 'photo=' + $scope.title,
-                        file: file
+                        context: 'photo=' + $scope.title
+
+
                     }
                 }).success(function(data, status, headers, config) {
                     console.log("success");
@@ -289,9 +302,9 @@ app.controller('CreateCondominoController', function($scope, $state, $rootScope,
                 // $scope.uploadFiles($("#imgInp")[0].files);
                 $scope.title = "Image (" + $scope.identification_number + " - " + $scope.name + $scope.last_name + ")";
                 residentsFunctions.insert({
-                    name: $scope.name,
-                    last_name: $scope.last_name,
-                    second_last_name: $scope.second_last_name,
+                    name: commonMethods.capitalizeFirstLetter($scope.name),
+                    last_name: commonMethods.capitalizeFirstLetter($scope.last_name),
+                    second_last_name: commonMethods.capitalizeFirstLetter($scope.second_last_name),
                     company_id: $rootScope.user.company_id,
                     identification_number: $scope.identification_number,
                     birthday: $scope.birthday,
@@ -356,9 +369,9 @@ app.controller('editCondominoController', function($scope, $auth, $state, $rootS
             } else {
                 commonMethods.waitingMessage();
                 residentsFunctions.update($scope.residentId, {
-                    name: $scope.name,
-                    last_name: $scope.last_name,
-                    second_last_name: $scope.second_last_name,
+                    name: commonMethods.capitalizeFirstLetter($scope.name),
+                    last_name: commonMethods.capitalizeFirstLetter($scope.last_name),
+                    second_last_name: commonMethods.capitalizeFirstLetter($scope.second_last_name),
                     company_id: company_id,
                     identification_number: $scope.identification_number,
                     birthday: $scope.birthday,

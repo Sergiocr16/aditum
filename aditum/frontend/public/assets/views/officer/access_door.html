@@ -28,7 +28,7 @@
                         <li>
                             <ul class="dropdown-menu-list scroll" style="height: 325px;" data-handle-color="#637283">
                                 <li ng-repeat="note in notes | orderBy:'-creation_date'">
-                                    <a href="inbox.html?a=view">
+                                    <a href="">
 
                                         <span class="subject">
                                             <span class="bold font-14 blue-font col-lg-5 col-md-5 no-padding">Casa {{note.house_id}}</span>
@@ -311,7 +311,7 @@
                                         </div>
                                         <h3 class="text-right ">
                                               <button type="submit" class="btn blue "><i class="fa fa-pencil "></i>Consultar</button>
-                                              <button  type="button" ng-click="hideRegisterForm=2"  class="btn default gray-font ">Cancelar</button>
+                                              <button  type="button" ng-click="show=4"  class="btn default gray-font ">Cancelar</button>
                                         </h3>
                                     </div>
 
