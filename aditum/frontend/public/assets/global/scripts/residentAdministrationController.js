@@ -17,7 +17,7 @@ app.controller('CondominosListController', function($scope, $state, $rootScope, 
             housesFunctions.get(data.house_id).success(function(dataHouse) {
                 if (dataHouse.securitykey == null && dataHouse.emergencyKey == null) {
                     bootbox.confirm({
-                        message: '<div class="gray-font font-15">Sus claves de seguridad aun no han sido definidas, recuerde que el tener establecidas las claves le provee mayor seguridad.</div>',
+                        message: '<div class="gray-font font-15">Sus claves de seguridad aún no han sido definidas, recuerde que el tener establecidas las claves le provee mayor seguridad.</div>',
                         closeButton: false,
 
                         buttons: {

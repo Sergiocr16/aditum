@@ -53,7 +53,7 @@ class VisitantsController < ApplicationController
     end
   end
 
-  def findRegisteredVisitant
+  def findRegisteredVisitantById
     @currentDate = (Time.now - 6.hours).strftime('%d %m %y %H:%M:%S')
     puts @currentDate
     @visitant = Visitant.where("identification_number = ? and is_invited = ? and company_id = ?", params[:id], 1, params[:company_id]).last
@@ -70,7 +70,23 @@ class VisitantsController < ApplicationController
      render :json => 0
    end
   end
-
+  def findRegisteredVisitantByCar
+    @currentDate = (Time.now - 6.hours).strftime('%d %m %y %H:%M:%S')
+    puts @currentDate
+    @visitant = Visitant.where("license_plate = ? and is_invited = ? and company_id = ?", params[:id], 1, params[:company_id]).last
+    if (@visitant != nil)
+    @starting_time = @visitant.invitation_starting_time.strftime('%d %m %y %H:%M:%S')
+    @limit_time = @visitant.invitation_limit_time.strftime('%d %m %y %H:%M:%S')
+    puts @starting_time
+      if(@currentDate.between?(@starting_time,  @limit_time))
+        render :json => @visitant
+       else
+         render :json => 0
+       end
+   else
+     render :json => 0
+   end
+  end
   # DELETE /visitants/1.json
   def destroy
     @visitant.destroy

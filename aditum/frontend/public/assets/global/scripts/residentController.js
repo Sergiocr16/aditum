@@ -307,7 +307,7 @@ app.controller('ResidentsCreateController', function($scope, $http, $rootScope, 
                     name: commonMethods.capitalizeFirstLetter($scope.name),
                     last_name: commonMethods.capitalizeFirstLetter($scope.last_name),
                     second_last_name: commonMethods.capitalizeFirstLetter($scope.second_last_name),
-                    company_id: $rootScope.user.company_id,
+                    company_id: 1,
                     identification_number: $scope.identification_number,
                     birthday: $scope.birthday,
                     email: $scope.email,
@@ -322,7 +322,7 @@ app.controller('ResidentsCreateController', function($scope, $http, $rootScope, 
                             email: $scope.email,
                             confirm_success_url: "/",
                             permission_level: 1,
-                            id_company: $rootScope.user.company_id,
+                            id_company: 1,
                             resident_id: dataResident.id
                         }).success(function(data) {
                             residentsFunctions.update(dataResident.id, {
@@ -533,7 +533,7 @@ app.controller('ResidentsEditController', function($scope, $http, $state, $rootS
                     name: commonMethods.capitalizeFirstLetter($scope.name),
                     last_name: commonMethods.capitalizeFirstLetter($scope.last_name),
                     second_last_name: commonMethods.capitalizeFirstLetter($scope.second_last_name),
-                    company_id: company_id,
+                    company_id: 1,
                     identification_number: $scope.identification_number,
                     birthday: $scope.birthday,
                     email: $scope.email,
@@ -555,7 +555,7 @@ app.controller('ResidentsEditController', function($scope, $http, $state, $rootS
                                 email: $scope.email,
                                 confirm_success_url: "/",
                                 permission_level: 1,
-                                id_company: company_id,
+                                id_company: 1,
                                 resident_id: dataResident.id
                             }).success(function(data, status) {
                                 residentsFunctions.update(dataResident.id, {
@@ -568,7 +568,7 @@ app.controller('ResidentsEditController', function($scope, $http, $state, $rootS
                         }
                     } else if (makeAcccion == 2) {
                         usersFunctions.update_sign_up(user_id, {
-                            id_company: company_id,
+                            id_company: 1,
                             enabled: 0,
                             email: $scope.email
                         });
@@ -576,7 +576,7 @@ app.controller('ResidentsEditController', function($scope, $http, $state, $rootS
                     } else if (email !== $scope.email) {
                         alert('cambiare el email');
                         usersFunctions.update_sign_up(user_id, {
-                            id_company: company_id,
+                            id_company: 1,
                             email: $scope.email
 
                         });

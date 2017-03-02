@@ -130,7 +130,37 @@ app.controller('accessController', function($scope, $state, $rootScope, $window,
                     }
                 }
             });
+            if ($scope.id_vehicule.length > 5) {
 
+                accessFunctions.findRegisteredVisitantByCar($scope.id_vehicule).success(function(data) {
+
+                    if (data == 0) {
+
+                    } else {
+                        $("#loadingIconnn").fadeOut(0);
+                        $("#visitantInvitedtAccess").fadeIn(0);
+                        $scope.show = 10;
+                        $scope.invited_visitant_name = data.name
+                        $scope.invited_visitant_last_name = data.last_name;
+                        $scope.invited_visitant_second_last_name = data.second_last_name;
+                        angular.forEach(housesPrueba, function(itemHouse, index) {
+                                if (itemHouse.id == data.id_house) {
+                                    $scope.invited_visitant_house_number = itemHouse.house_number;
+                                }
+                            })
+                            // $scope.invited_visitant_house_number = data.id_house;
+                        $scope.invited_visitant_indentification = data.identification_number;
+                        if (data.license_plate == null) {
+                            $scope.invited_visitant_license_plate = "Ninguna";
+
+                        } else {
+                            $scope.invited_visitant_license_plate = data.license_plate;
+                        }
+
+
+                    }
+                });
+            }
         }
 
     };
@@ -169,7 +199,7 @@ app.controller('accessController', function($scope, $state, $rootScope, $window,
 
             if ($scope.id_number.length > 6) {
 
-                accessFunctions.findRegisteredVisitant($scope.id_number).success(function(data) {
+                accessFunctions.findRegisteredVisitantById($scope.id_number).success(function(data) {
 
                     if (data == 0) {
 
@@ -316,8 +346,8 @@ app.controller('accessController', function($scope, $state, $rootScope, $window,
 
     setInterval(getHomeServices, 5000);
     setInterval(getEmergency, 5000);
-    setInterval(cleanNotes, 500000);
-    setInterval(getInfo, 12000);
+    setInterval(cleanNotes, 5000000);
+    setInterval(getInfo, 5000);
     $scope.hideRegisterForm = 2;
     $scope.officersLinked = []
     $scope.moveToLink = function(officers) {
@@ -451,9 +481,9 @@ app.controller('accessController', function($scope, $state, $rootScope, $window,
         })
         commonMethods.waitingMessage();
         accessFunctions.insertVisitor({
-            name: $scope.invited_visitant_name,
-            last_name: $scope.invited_visitant_last_name,
-            second_last_name: $scope.invited_visitant_second_last_name,
+          name: commonMethods.capitalizeFirstLetter($scope.invited_visitant_name),
+          last_name: commonMethods.capitalizeFirstLetter($scope.invited_visitant_last_name),
+          second_last_name: commonMethods.capitalizeFirstLetter($scope.invited_visitant_second_last_name),
             company_id: $rootScope.user.company_id,
             identification_number: $scope.invited_visitant_indentification,
             license_plate: $scope.invited_visitant_license_plate,
@@ -464,7 +494,10 @@ app.controller('accessController', function($scope, $state, $rootScope, $window,
             $scope.id_vehicule = "";
             bootbox.hideAll();
             $scope.show = 4;
+            $("#license_plate").css("text-transform", "none");
+            $("#license_plate").attr("placeholder", "Número placa (sin guiones)");
             toastr["success"]("Se ha registrado el visitante correctamente");
+
 
         });
 
@@ -500,9 +533,9 @@ app.controller('accessController', function($scope, $state, $rootScope, $window,
     $scope.insertVisitor = function() {
         commonMethods.waitingMessage();
         accessFunctions.insertVisitor({
-            name: $scope.visitor_name,
-            last_name: $scope.visitor_last_name,
-            second_last_name: $scope.visitor_second_last_name,
+          name: commonMethods.capitalizeFirstLetter($scope.visitor_name),
+          last_name: commonMethods.capitalizeFirstLetter($scope.visitor_last_name),
+          second_last_name: commonMethods.capitalizeFirstLetter($scope.visitor_second_last_name),
             company_id: $rootScope.user.company_id,
             identification_number: $scope.visitor_id_number,
             license_plate: $scope.visitor_license_plate,
@@ -513,6 +546,8 @@ app.controller('accessController', function($scope, $state, $rootScope, $window,
             $scope.id_vehicule = "";
             bootbox.hideAll();
             $scope.show = 4;
+            $("#vehicule_license_plate").css("text-transform", "none");
+            $("#vehicule_license_plate").attr("placeholder", "Número placa (sin guiones)");
             toastr["success"]("Se ha registrado el visitante correctamente");
 
         });
@@ -521,7 +556,7 @@ app.controller('accessController', function($scope, $state, $rootScope, $window,
 
 
 });
-``
+
 
 app.factory('accessFunctions', function($http, $rootScope) {
     var server = "https://afternoon-woodland-36877.herokuapp.com/api/companies/" + $rootScope.user.company_id;
@@ -561,9 +596,13 @@ app.factory('accessFunctions', function($http, $rootScope) {
         getNotes: function(id) {
             return $http.get(server + '/notes')
         },
-        findRegisteredVisitant: function(id) {
-            return $http.get(server + '/visitants/invited/find/' + id)
+        findRegisteredVisitantById: function(id) {
+            return $http.get(server + '/visitants/invited/findById/' + id)
         },
+        findRegisteredVisitantByCar: function(idCar) {
+            return $http.get(server + '/visitants/invited/findByCar/' + idCar)
+        },
+
         reportTurn: function(data) {
             return $http({
                 url: server + "/watches",

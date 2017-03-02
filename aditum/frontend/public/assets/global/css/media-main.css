@@ -134,6 +134,10 @@
 padding: 0;
 
 }
+.emergencyTitle{
+  font-size: 40px !important;
+}
+
 .access-information-result-container{
   min-height: 0% !important;
   margin-top: 2% !important;
@@ -142,6 +146,9 @@ padding-bottom: 10px !important;
 .page-title{
   font-size: 25px !important;
 
+}
+#disabledButton{
+  padding-left: 50px;
 }
 .input_id{
   font-size:  17px !important;

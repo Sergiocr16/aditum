@@ -37,7 +37,8 @@ Rails.application.routes.draw do
     resources :emergencies
     resources :company_configuration
     get 'visitants/find/:id' => 'visitants#find'
-    get 'visitants/invited/find/:id' => 'visitants#findRegisteredVisitant'
+    get 'visitants/invited/findById/:id' => 'visitants#findRegisteredVisitantById'
+        get 'visitants/invited/findByCar/:id' => 'visitants#findRegisteredVisitantByCar'
     resources :access_door
     resources :users do
     get '/sign_in_count' => :count
